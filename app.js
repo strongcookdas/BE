@@ -1,10 +1,26 @@
 const express = require("express");
+const session = require("express-session");
+
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			secure: false,
+			maxAge: 1000 * 60 * 60 * 24 * 7,
+		},
+	})
+);
+
+const indexRouter = require("./routes/index");
+const authRouter = require("./routes/auth");
+
+app.use("/", indexRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
 	console.log(`App listening at http://localhost:${port}`);
