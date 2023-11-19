@@ -28,6 +28,21 @@ exports.updateLocation = async (req, res, next) => {
     }
 }
 
+exports.deleteLocation = async (req, res, next) => {
+    try {
+        const deletedLocation = await Location.findById(req.params.id);
+        if (!deletedLocation) {
+            const error = new Error("not found location");
+            error.status = 404;
+            return next(error)
+        }
+        await Location.deleteOne(deletedLocation);
+        res.json({result: "delete location"});
+    } catch (error) {
+        next(error);
+    }
+}
+
 exports.acceptAddLocation = async (req, res, next) => {
     try {
         const acceptLocation = await Location.findById(req.params.id);
