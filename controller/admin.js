@@ -27,3 +27,19 @@ exports.updateLocation = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.acceptAddLocation = async (req, res, next) => {
+    try {
+        const acceptLocation = await Location.findById(req.params.id);
+        if (!acceptLocation) {
+            const error = new Error("not found apply location");
+            error.status = 404;
+            return next(error)
+        }
+        acceptLocation.isVisible = true;
+        await acceptLocation.save();
+        res.json(acceptLocation);
+    } catch (error) {
+        next(error);
+    }
+}
