@@ -6,6 +6,7 @@ const connect = require("./models/index");
 dotenv.config();
 
 const locationRouter = require("./routes/location");
+const adminRouter = require("./routes/admin");
 const app = express();
 const port = 8000;
 connect();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 app.use("/locations",locationRouter);
+app.use("/admin",adminRouter);
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
