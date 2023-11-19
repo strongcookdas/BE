@@ -10,6 +10,15 @@ exports.readLocations = async (req,res,next) => {
  }
 }
 
+exports.readLocation = async (req,res,next) => {
+ try {
+  const location = await Location.findById(req.params.id);
+  res.json(location);
+ }catch (err){
+  next(err);
+ }
+}
+
 exports.applyLocation = async (req,res,next) => {
  try {
   const location = new LocationApplyRequest(req.body);
