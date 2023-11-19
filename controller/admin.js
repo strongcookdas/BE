@@ -73,3 +73,12 @@ exports.rejectAddLocation = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.getNotAcceptedLocations= async (req, res, next) => {
+    try {
+        const notAcceptedLocations = await Location.find({isVisible:false});
+        res.json(notAcceptedLocations);
+    } catch (err) {
+        next(err);
+    }
+}
