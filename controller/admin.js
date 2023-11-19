@@ -43,3 +43,18 @@ exports.acceptAddLocation = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.rejectAddLocation = async (req, res, next) => {
+    try {
+        const rejectedLocation = await Location.findById(req.params.id);
+        if (!rejectedLocation) {
+            const error = new Error("not found apply location");
+            error.status = 404;
+            next(error)
+        }
+        await Location.deleteOne(rejectedLocation);
+        res.json({result: "reject add location"});
+    } catch (error) {
+        next(error);
+    }
+}
