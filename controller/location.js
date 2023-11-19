@@ -13,6 +13,11 @@ exports.readLocations = async (req,res,next) => {
 exports.readLocation = async (req,res,next) => {
  try {
   const location = await Location.findById(req.params.id);
+  if(!location){
+   const error = new Error("not found location");
+   error.status = 404;
+   return next(error)
+  }
   res.json(location);
  }catch (err){
   next(err);
