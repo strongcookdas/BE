@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
 });
 app.use("/locations",locationRouter);
 
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({err: err.message? err.message:"server error"});
+});
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
