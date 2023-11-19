@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const validCategories = ['hospital', 'restaurant', 'cafe'];
+
 const locationSchema = new mongoose.Schema({
     koName: { type: String, required: true },
     enName: { type: String },
@@ -10,7 +12,16 @@ const locationSchema = new mongoose.Schema({
     englishSpeaking: { type: Boolean, required: true },
     restroomAvailable: { type: Boolean, required: true },
     description: { type: String },
-    category: { type: String },
+    category: {
+        type: String,
+        validate: {
+            validator: function (value) {
+                return validCategories.includes(value.toLowerCase());
+            },
+            message: props => `${props.value} is not a valid category. Please choose from ${validCategories.join(', ')}.`,
+        },
+        required: true,
+    },
     image: { type: String },
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
