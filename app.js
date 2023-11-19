@@ -7,7 +7,7 @@ dotenv.config();
 
 const locationRouter = require("./routes/location");
 const app = express();
-const port = 8080;
+const port = 8000;
 connect();
 
 app.use(morgan("dev"));
@@ -16,7 +16,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-app.use("/location",locationRouter);
+app.use("/locations",locationRouter);
 
 
 app.listen(port, () => {
