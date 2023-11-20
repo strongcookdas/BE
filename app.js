@@ -7,6 +7,7 @@ dotenv.config();
 
 const locationRouter = require("./routes/location");
 const adminRouter = require("./routes/admin");
+const keywordRouter = require("./routes/Keyword");
 const app = express();
 const port = 8000;
 connect();
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 app.use("/locations",locationRouter);
 app.use("/admin",adminRouter);
+app.use("/keywords",keywordRouter);
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);

@@ -6,7 +6,7 @@ const keywordSchema = new mongoose.Schema({
         enum: ['hospital', 'restaurant', 'cafe'],
         required: true,
     },
-    keywords: {
+    keyword: {
         type: String,
         required: true,
     },
