@@ -57,3 +57,18 @@ exports.getReviewsByLocation = async (req,res,next) => {
         next(err);
     }
 }
+
+exports.deleteReview = async (req,res,next) => {
+    try {
+        const review = await Review.findById(req.params.id);
+        if(!review){
+            const error = new Error("not found review");
+            error.status = 404;
+            return next(error);
+        }
+        await Review.deleteOne(review);
+        res.json({result:"delete review"});
+    }catch (err){
+        next(err);
+    }
+}
