@@ -9,3 +9,13 @@ exports.createKeyword = async (req, res, next) => {
         next(err);
     }
 }
+
+exports.getKeywordByCategory = async (req, res, next) => {
+    try{
+        const category = req.query.category;
+        const keywords = await Keyword.find(category?{category:req.query.category}:null);
+        res.json(keywords);
+    }catch (err){
+        next(err);
+    }
+}
