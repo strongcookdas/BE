@@ -48,3 +48,12 @@ exports.getReviews = async (req,res,next) => {
         next(err);
     }
 }
+
+exports.getReviewsByLocation = async (req,res,next) => {
+    try {
+        const reviews = await Review.find({location:req.params.locationId}).populate('keywords');
+        res.json(reviews);
+    }catch (err){
+        next(err);
+    }
+}
