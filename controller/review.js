@@ -1,6 +1,7 @@
 const Review = require("../models/review");
 const Location = require("../models/location");
-const WriteReviewRequest = require("../dto/review/WriteReivewRequest")
+const WriteReviewRequest = require("../dto/review/WriteReivewRequest");
+const UpdateReviewRequest = require("../dto/review/UpdateReviewRequest");
 
 exports.writeReview = async (req,res,next) => {
     try {
@@ -19,6 +20,22 @@ exports.writeReview = async (req,res,next) => {
         );
         await reviewDoc.save();
         res.json({message: 'Review created successfully'});
+    }catch (err){
+        next(err);
+    }
+}
+
+exports.updateReview = async (req,res,next) => {
+    try {
+        const updateReviewRequest = new UpdateReviewRequest(req.body);
+        const review = await Review.findByIdAndUpdate(req.params.id,updateReviewRequest);
+        if(!review){
+            const error = new Error("not found review");
+            error.status = 404;
+            return next(error);
+        }
+        await reviewDoc.save();
+        res.json({result:"update review"});
     }catch (err){
         next(err);
     }
