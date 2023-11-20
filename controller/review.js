@@ -14,7 +14,7 @@ exports.writeReview = async (req,res,next) => {
         const review = new WriteReviewRequest(req.body);
         const reviewDoc = await Review.create(
             {
-                locationId: location.id,
+                location: location.id,
                 ...review
             }
         );
@@ -34,8 +34,16 @@ exports.updateReview = async (req,res,next) => {
             error.status = 404;
             return next(error);
         }
-        await reviewDoc.save();
         res.json({result:"update review"});
+    }catch (err){
+        next(err);
+    }
+}
+
+exports.getReviews = async (req,res,next) => {
+    try {
+        const reviews = await Review.find().populate('keywords');
+        res.json(reviews);
     }catch (err){
         next(err);
     }

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-    locationId: {
+    location: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Location', // Assuming your location schema is named 'Location'
         required: true,
