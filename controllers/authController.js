@@ -7,7 +7,7 @@ exports.createUser = (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-	const user = await findUser(req.body.username, req.body.password);
+	const user = await findUser(req.body.email, req.body.password);
 	if (user) {
 		req.session.userId = user._id;
 		res.status(200).send("user logged in");
@@ -22,7 +22,7 @@ exports.loginUser = async (req, res) => {
 exports.logoutUser = (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
-			throw CustomError(ERROR_CODES.INTERNAL_SERVER_ERROR, err.message);
+			throw CustomError(ERROR_CODES.INTERNAL_SERVER, err.message);
 		} else {
 			res.status(200).send("user logged out");
 		}
