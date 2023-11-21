@@ -8,10 +8,7 @@ const app = express();
 const port = 3000;
 
 mongoose
-	.connect("mongodb://localhost:27017/exchangers", {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
+	.connect("mongodb://localhost:27017/exchangers")
 	.then(() => console.log("Successfully connected to MongoDB"))
 	.catch((error) => console.error("Connection error", error));
 
@@ -19,9 +16,9 @@ app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
 		resave: false,
-		saveUninitialized: true,
+		saveUninitialized: false,
 		cookie: {
-			secure: false,
+			secure: false, // http도 허용
 			maxAge: 1000 * 60 * 60 * 24 * 7,
 		},
 	})
