@@ -27,8 +27,8 @@ app.use(
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 
-app.use("/", indexRouter);
-app.use("/auth", authRouter);
+app.use("/api/exchangers/v1", indexRouter);
+app.use("/api/exchangers/v1/auth", authRouter);
 
 app.use(errorHandler);
 
