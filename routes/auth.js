@@ -5,9 +5,9 @@ const authController = require("../controllers/authController");
 const {
 	checkNotAuthenticated,
 	checkAuthenticated,
-} = require("../middleware/authMiddleware");
+} = require("../middlewares/authMiddleware");
 
-router.post("/signup", checkNotAuthenticated, authController.createUser);
+router.post("/signup", checkNotAuthenticated, authController.signupUser);
 router.post("/signin", checkNotAuthenticated, authController.loginUser);
 router.post("/signout", checkAuthenticated, authController.logoutUser);
 
