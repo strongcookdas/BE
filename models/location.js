@@ -10,7 +10,7 @@ const locationSchema = new mongoose.Schema({
     kioskAvailable: { type: Boolean, required: true },
     parkingAvailable: { type: Boolean, required: true },
     englishSpeaking: { type: Boolean, required: true },
-    restroomAvailable: { type: Boolean, required: true },
+    wifiAvailable: { type: Boolean, required: true },
     description: { type: String },
     category: {
         type: String,
