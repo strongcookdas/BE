@@ -26,6 +26,10 @@ const locationSchema = new mongoose.Schema({
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
     isVisible: { type: Boolean, required: true },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const Location = mongoose.model('Location', locationSchema);
