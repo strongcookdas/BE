@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connect = require("./models/index");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app = express();
 const port = 8000;
 connect();
 
+app.use(cors({origin:true,credentials:true}));
 app.use(morgan("dev"));
 app.use(express.json());
 
